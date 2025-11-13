@@ -1,0 +1,10 @@
+[
+  {
+    "keywords": ["food", "ration", "aid"],
+    "response": "WFP is distributing aid every Tuesday at the central community hall. Verify locally before traveling."
+  },
+  {
+    "keywords": ["school", "education", "learn"],
+    "response": "The displaced schools program offers basic education for children aged 5-12 in the northern camp."
+  }
+]
