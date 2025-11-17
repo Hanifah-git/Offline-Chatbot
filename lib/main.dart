@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'knowledge_entry.dart';
 import 'knowledge_service.dart';
 import 'nlp_engine.dart';
+import 'deployment_status_screen.dart';
 
 void main() => runApp(const ChatApp());
 
@@ -22,7 +23,6 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-
   final _textController = TextEditingController();
 
   final ScrollController _scrollController = ScrollController();
@@ -38,7 +38,8 @@ class _ChatScreenState extends State<ChatScreen> {
 
   bool _isLoading = true;
 
-  static const String _disclaimer = "\n\n⚠️ IMPORTANT: Info may be outdated. Verify locally before traveling.";
+  static const String _disclaimer =
+      "\n\n⚠️ IMPORTANT: Info may be outdated. Verify locally before traveling.";
 
   @override
   void initState() {
@@ -50,6 +51,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   void dispose() {
     _textController.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -61,8 +63,6 @@ class _ChatScreenState extends State<ChatScreen> {
       _knowledgeBase = data;
       _isLoading = false;
     });
-
-    print("SUCCESS: Loaded ${_knowledgeBase.length} knowledge entries.");
   }
 
   void _sendMessage() {
@@ -104,6 +104,19 @@ class _ChatScreenState extends State<ChatScreen> {
       appBar: AppBar(
         title: const Text('Offline Community Support'),
         backgroundColor: Colors.blueGrey,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.location_on),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const DeploymentStatusScreen(),
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: Column(
         children: [
